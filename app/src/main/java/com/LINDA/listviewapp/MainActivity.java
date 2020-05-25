@@ -8,7 +8,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private String[] favorite;
+    private String[] fruit;
     private ListView ls;
 
 
@@ -16,21 +16,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        favorite =getResources().getStringArray(R.array.favorite);
-       ls=(ListView)findViewById(R.id.ls);
-        ArrayAdapter<String>  ad =new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,favorite);
+        fruit =getResources().getStringArray(R.array.fruit);
+        ls=findViewById(R.id.ls);
+        ArrayAdapter<String>  ad = new ArrayAdapter<>(this,android.R.layout.simple_list_item_multiple_choice, fruit);
         ls.setAdapter(ad);
-        ls.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        ls.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
     }
 
     public void btnOK(View view) {
-        String str ="";
-        for (int i = 0;i<favorite.length;i++){
-            if (ls.isItemChecked(i))
-                str += favorite[i] +"\n";
+        String str = "";
+        for(int i=0 ; i< fruit.length; i++){
+            if(ls.isItemChecked(i))
+                str += fruit[i] + "\n";
         }
-        TextView txvshow =(TextView)findViewById(R.id.txvshow);
-        txvshow.setText(str);
+
+        TextView txvShow = findViewById(R.id.txvshow);
+        txvShow.setText(str);
+//        for (int i = 0; i< favorite.length; i++){
+//            if (ls.isItemChecked(i))
+//                str += favorite[i] + "\n";
+//        }
+//        TextView txvshow =findViewById(R.id.txvshow);
+//        txvshow.setText(str);
     }
 }
